@@ -5,15 +5,17 @@ import {
   View, 
   ScrollView, 
   SafeAreaView,
-  FlatList
+  FlatList,
+  SectionList
  } from 'react-native';
 import pokemonList from './data.json';
+import groupedPokemonList from './grouped-data.json';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.scrollView}>
-        <FlatList 
+        {/* <FlatList 
           data={pokemonList} 
           renderItem={({item}) => {
             return (
@@ -27,6 +29,28 @@ export default function App() {
           ListEmptyComponent={<Text style={styles.emptyListText}>No Pokemon Found</Text>}
           ListHeaderComponent={<Text style={styles.headerText}>Pokemon List</Text>}
           ListFooterComponent={<Text style={styles.footerText}>End of list</Text>}
+        /> */}
+
+        <SectionList 
+          sections={groupedPokemonList} 
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.card}>
+                <Text style={styles.cardText}>{item}</Text>
+              </View>
+            );
+          }}
+          renderSectionHeader={({ section }) => {
+            return (
+              <Text style={styles.headerText}>{section.type}</Text>
+            );
+          }}
+          ItemSeparatorComponent={() => (
+            <View style={{height: 16,}}/>
+          )}
+          SectionSeparatorComponent={() => (
+            <View style={{height: 16,}}/>
+          )}
         />
       </View>
     </SafeAreaView>
@@ -52,7 +76,7 @@ const styles = StyleSheet.create({
   },
 
   cardText: {
-    fontSize: 30,
+    fontSize: 24,
   },
 
   emptyListText: {
@@ -72,5 +96,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     marginTop: 12,
+  },
+
+  sectionHeaderText: {
+    backgroundColor: "#FFFFFF",
+    fontSize: 30,
+    fontWeight: "bold",
   },
 });
