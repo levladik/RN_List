@@ -33,6 +33,7 @@ export default function App() {
               </View>
             );
           }}
+          ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         />
       </View>
     </SafeAreaView>
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     padding: 16,
     borderRadius: 8,
-    marginBottom: 16,
     borderWidth: 1,
   },
 
